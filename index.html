@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elegance Events & Decor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --primary-gold: #d4af37;
+            --text-light: #ffffff;
+        }
+
+        body {
+            color: var(--text-light);
+            overflow-x: hidden;
+            position: relative; 
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), 
+                        url('background.jpg') center/cover;
+            z-index: -1;
+            will-change: transform; 
+        }
+
+        .glass-effect {
+            background: rgba(20, 20, 20, 0.35); 
+            backdrop-filter: blur(25px); 
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.2); 
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6); 
+        }
+
+        nav {
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            color: var(--primary-gold);
+            font-weight: 600;
+            text-decoration: none;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-gold);
+        }
+
+        .hero {
+            padding-top: 100px; 
+            padding-bottom: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 45px;
+            color: var(--primary-gold);
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.9);
+        }
+
+        .hero p {
+            font-size: 16px;
+            max-width: 600px;
+            color: #eee;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.9);
+        }
+
+        .btn {
+            padding: 12px 35px;
+            background: linear-gradient(135deg, #d4af37, #aa8623);
+            color: #000;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+            margin-bottom: 10px;
+        }
+
+        .services {
+            padding: 0 20px 40px 20px; 
+            display: flex;
+            justify-content: center;
+        }
+
+        .services-menu {
+            width: 100%;
+            max-width: 450px;
+            padding: 30px 20px;
+            border-radius: 20px;
+        }
+
+        .menu-title {
+            text-align: center;
+            color: var(--primary-gold);
+            font-size: 22px;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .menu-title::before, .menu-title::after {
+            content: "";
+            flex: 1;
+            border-bottom: 1px solid var(--primary-gold);
+            margin: 0 15px;
+        }
+
+        .services-list {
+            list-style: none;
+        }
+
+        .services-list li {
+            padding: 12px 0;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .services-list li:last-child {
+            border-bottom: none;
+        }
+
+        .list-icon {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            font-size: 16px;
+            color: #000;
+        }
+
+        .features-row {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 15px 0;
+        }
+
+        .feature-item {
+            text-align: center;
+            flex: 1;
+            font-size: 11px;
+            font-weight: 500;
+            color: #fff;
+            position: relative;
+        }
+
+        .feature-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 10%;
+            height: 80%;
+            width: 1px;
+            background-color: rgba(255,255,255,0.2);
+        }
+
+        .feature-icon {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .custom-package-box {
+            margin-top: 25px;
+            border: 1px solid var(--primary-gold);
+            border-radius: 12px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        .custom-package-box h4 {
+            color: var(--primary-gold);
+            font-size: 14px;
+            margin-bottom: 2px;
+        }
+
+        .custom-package-box p {
+            font-size: 11px;
+            color: #ddd;
+        }
+
+        .booking {
+            padding: 10px 20px 80px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        form {
+            padding: 35px 25px;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            color: var(--primary-gold);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.4); 
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: #fff;
+            border-radius: 8px;
+            outline: none;
+            font-size: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        ::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: var(--primary-gold);
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        option {
+            background-color: #111;
+            color: #fff;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #d4af37, #aa8623);
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        /* --- REDIRECT POPUP CSS --- */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .popup-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .success-popup {
+            background: rgba(20, 20, 20, 0.7);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid var(--primary-gold);
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
+        }
+
+        .popup-overlay.active .success-popup {
+            transform: scale(1);
+        }
+
+        /* Loading Spinner */
+        .loader {
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-top: 4px solid var(--primary-gold);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .success-popup h3 {
+            color: var(--primary-gold);
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .success-popup p {
+            color: #eee;
+            font-size: 15px;
+        }
+
+        footer {
+            padding: 20px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-location {
+            color: #eee;
+            font-size: 13px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        @media (max-width: 768px) {
+            nav { justify-content: center; }
+            .nav-links { display: none; }
+            .hero h1 { font-size: 38px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="glass-effect">
+        <a href="#" class="logo">Elegance</a>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#services">Services</a>
+            <a href="#book">Book Now</a>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <h1>Elegance Events</h1>
+        <p>We Decorate Moments, You Celebrate Memories.</p>
+        <a href="#book" class="btn">Book Your Event</a>
+    </section>
+
+    <section id="services" class="services">
+        <div class="services-menu glass-effect">
+            <h2 class="menu-title">OUR SERVICES</h2>
+            
+            <ul class="services-list">
+                <li><span class="list-icon">🎈</span> Birthday Decoration</li>
+                <li><span class="list-icon">❤️</span> Anniversary Decoration</li>
+                <li><span class="list-icon">👼</span> Baby Shower Decoration</li>
+                <li><span class="list-icon">💍</span> Proposal & Romantic Setup</li>
+                <li><span class="list-icon">🎉</span> Welcome Decoration</li>
+                <li><span class="list-icon">🏢</span> Corporate Events</li>
+                <li><span class="list-icon">⭐</span> All Types of Decoration</li>
+            </ul>
+
+            <div class="features-row">
+                <div class="feature-item"><div class="feature-icon">👥</div>PROFESSIONAL<br>TEAM</div>
+                <div class="feature-item"><div class="feature-icon">🕒</div>ON TIME<br>SERVICE</div>
+                <div class="feature-item"><div class="feature-icon">🥇</div>BEST QUALITY<br>DECORATION</div>
+            </div>
+
+            <div class="custom-package-box">
+                <div class="star-icon" style="font-size: 30px;">🎖️</div>
+                <div>
+                    <h4>CUSTOM PACKAGES</h4>
+                    <p>AVAILABLE AS PER YOUR BUDGET & NEED</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="book" class="booking">
+        <form id="bookingForm" class="glass-effect">
+            <h2 style="color: var(--primary-gold); text-align: center; margin-bottom: 25px;">Book Online</h2>
+            
+            <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" required placeholder="Enter full name">
+            </div>
+            
+            <div class="form-group">
+                <label for="phone">Mobile Number</label>
+                <input type="tel" id="phone" required placeholder="Enter mobile number">
+            </div>
+
+            <div class="form-group">
+                <label for="date">Event Date</label>
+                <input type="date" id="date" required>
+            </div>
+
+            <div class="form-group">
+                <label for="service">Select Service</label>
+                <select id="service" required>
+                    <option value="" disabled selected>Select service type</option>
+                    <option value="Birthday Decoration">Birthday Decoration</option>
+                    <option value="Anniversary Decoration">Anniversary Decoration</option>
+                    <option value="Baby Shower Decoration">Baby Shower Decoration</option>
+                    <option value="Proposal & Romantic Setup">Proposal & Romantic Setup</option>
+                    <option value="Welcome Decoration">Welcome Decoration</option>
+                    <option value="Corporate Events">Corporate Events</option>
+                    <option value="Custom/Other">Other Decoration</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="address">Venue Address</label>
+                <textarea id="address" rows="3" required placeholder="Enter full address details..."></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn" id="submitBtn">Proceed to Book</button>
+        </form>
+    </section>
+
+    <!-- LOADING / REDIRECT POPUP -->
+    <div class="popup-overlay" id="popupOverlay">
+        <div class="success-popup">
+            <div class="loader"></div>
+            <h3>Almost Done!</h3>
+            <p>Your details are ready. We are securely redirecting you to WhatsApp to confirm the booking...</p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-location">
+            <span>📍</span>
+            <span>Thane | Mumbai | Kalyan | Dombivli & Surrounding Areas</span>
+        </div>
+    </footer>
+
+    <script>
+        const bookingForm = document.getElementById('bookingForm');
+        const popupOverlay = document.getElementById('popupOverlay');
+
+        bookingForm.addEventListener('submit', function(e) {
+            e.preventDefault(); 
+
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const date = document.getElementById('date').value;
+            const service = document.getElementById('service').value;
+            const address = document.getElementById('address').value;
+
+            // WhatsApp ka text ready ho raha hai
+            const whatsappMessage = `*New Decoration Enquiry!* 🎉%0A%0A*Name:* ${name}%0A*Phone:* ${phone}%0A*Event Date:* ${date}%0A*Service:* ${service}%0A*Address:* ${address}%0A%0APlease check and confirm my booking.`;
+            const whatsappNumber = "918454882926";
+            const whatsappLink = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+
+            // 1. Popup dikhao jisme likha hoga "Redirecting to WhatsApp..."
+            popupOverlay.classList.add('active');
+
+            // 2. Theek 2.5 seconds (2500ms) baad WhatsApp app open hoga
+            setTimeout(function() {
+                // Link ko usi tab mein open karega taaki mobile mein direct app khule
+                window.location.href = whatsappLink; 
+                
+                // Form clear karna aur popup band karna
+                bookingForm.reset();
+                popupOverlay.classList.remove('active');
+            }, 2500); 
+        });
+    </script>
+
+</body>
+</html>
