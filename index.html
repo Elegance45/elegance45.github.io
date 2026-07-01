@@ -33,17 +33,17 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), 
-                        url('background.jpg') center/cover;
+            background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.85)), 
+                        url('bg.png') center/cover;
             z-index: -1;
             will-change: transform; 
         }
 
         .glass-effect {
-            background: rgba(20, 20, 20, 0.35); 
-            backdrop-filter: blur(25px); 
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 255, 255, 0.2); 
+            background: rgba(20, 20, 20, 0.45); 
+            backdrop-filter: blur(15px); 
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.15); 
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6); 
         }
 
@@ -150,40 +150,174 @@
             margin: 0 15px;
         }
 
-        .services-list {
-            list-style: none;
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 15px;
+            margin-bottom: 25px;
         }
 
-        .services-list li {
-            padding: 12px 0;
-            border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
+        .service-card {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 12px;
+            overflow: hidden;
+            text-align: center;
+            cursor: pointer; /* Yahan cursor change kiya hai takki pata chale ki click ho sakta hai */
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary-gold);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.2);
+        }
+
+        .service-card img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            display: block;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .service-card .service-name {
+            padding: 10px 5px;
+            font-size: 13px;
+            color: var(--text-light);
+            font-weight: 500;
             display: flex;
             align-items: center;
-            font-size: 15px;
-            font-weight: 500;
+            justify-content: center;
+            gap: 5px;
         }
 
-        .services-list li:last-child {
-            border-bottom: none;
+        .service-card.full-width {
+            grid-column: span 2;
         }
 
-        .list-icon {
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 50%;
-            width: 32px;
-            height: 32px;
+        .service-card.full-width img {
+            height: 140px;
+        }
+
+        /* --- NAYA PHOTO INFO MODAL (MAKKHAN ANIMATION) --- */
+        .info-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(5px);
+            z-index: 3000;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-right: 15px;
-            font-size: 16px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+            padding: 20px;
+        }
+
+        .info-modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .info-modal-content {
+            background: rgba(20, 20, 20, 0.95);
+            border: 1px solid var(--primary-gold);
+            border-radius: 15px;
+            max-width: 450px;
+            width: 100%;
+            overflow: hidden;
+            transform: scale(0.7) translateY(30px);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
+        }
+
+        .info-modal-overlay.active .info-modal-content {
+            transform: scale(1) translateY(0);
+        }
+
+        .close-modal-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            border: 1px solid var(--primary-gold);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            font-size: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal-btn:hover {
+            background: var(--primary-gold);
             color: #000;
         }
 
+        .modal-image-box {
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .modal-image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-text-box {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .modal-text-box h3 {
+            color: var(--primary-gold);
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+
+        .modal-text-box p {
+            color: #ccc;
+            font-size: 13.5px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .modal-book-btn {
+            display: inline-block;
+            padding: 10px 25px;
+            background: linear-gradient(135deg, #d4af37, #aa8623);
+            color: #000;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: transform 0.2s;
+        }
+
+        .modal-book-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Features row */
         .features-row {
             display: flex;
             justify-content: space-between;
-            margin-top: 25px;
+            margin-top: 10px;
             border-top: 1px solid rgba(255, 255, 255, 0.2);
             border-bottom: 1px solid rgba(255, 255, 255, 0.2);
             padding: 15px 0;
@@ -265,7 +399,7 @@
         .form-group input, .form-group select, .form-group textarea {
             width: 100%;
             padding: 12px;
-            background: rgba(0, 0, 0, 0.4); 
+            background: rgba(0, 0, 0, 0.5); 
             border: 1px solid rgba(255, 255, 255, 0.25);
             color: #fff;
             border-radius: 8px;
@@ -280,7 +414,7 @@
 
         .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
             border-color: var(--primary-gold);
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.7);
         }
 
         option {
@@ -301,7 +435,7 @@
             margin-top: 10px;
         }
 
-        /* --- REDIRECT POPUP CSS --- */
+        /* --- SUCCESS POPUP CSS --- */
         .popup-overlay {
             position: fixed;
             top: 0;
@@ -324,7 +458,7 @@
         }
 
         .success-popup {
-            background: rgba(20, 20, 20, 0.7);
+            background: rgba(20, 20, 20, 0.8);
             backdrop-filter: blur(25px);
             -webkit-backdrop-filter: blur(25px);
             border: 1px solid var(--primary-gold);
@@ -342,7 +476,6 @@
             transform: scale(1);
         }
 
-        /* Loading Spinner */
         .loader {
             border: 4px solid rgba(255, 255, 255, 0.1);
             border-top: 4px solid var(--primary-gold);
@@ -371,26 +504,29 @@
         }
 
         footer {
-            padding: 20px;
+            padding: 25px;
             text-align: center;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(10px);
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .footer-location {
-            color: #eee;
-            font-size: 13px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
+            color: #e0e0e0;
+            font-size: 15px;
+            letter-spacing: 1px;
+            font-weight: 500;
         }
 
         @media (max-width: 768px) {
             nav { justify-content: center; }
             .nav-links { display: none; }
             .hero h1 { font-size: 38px; }
+        }
+        
+        @media (max-width: 400px) {
+            .service-card img { height: 85px; }
+            .service-card.full-width img { height: 120px; }
         }
     </style>
 </head>
@@ -415,15 +551,44 @@
         <div class="services-menu glass-effect">
             <h2 class="menu-title">OUR SERVICES</h2>
             
-            <ul class="services-list">
-                <li><span class="list-icon">🎈</span> Birthday Decoration</li>
-                <li><span class="list-icon">❤️</span> Anniversary Decoration</li>
-                <li><span class="list-icon">👼</span> Baby Shower Decoration</li>
-                <li><span class="list-icon">💍</span> Proposal & Romantic Setup</li>
-                <li><span class="list-icon">🎉</span> Welcome Decoration</li>
-                <li><span class="list-icon">🏢</span> Corporate Events</li>
-                <li><span class="list-icon">⭐</span> All Types of Decoration</li>
-            </ul>
+            <div class="service-grid">
+                
+                <div class="service-card" onclick="openInfoModal('birthday.png', 'Birthday Decoration', 'Make your special day unforgettable with our premium balloon, lighting, and theme setups tailored just for you. We design magical moments for all ages.', 'Birthday Decoration')">
+                    <img src="birthday.png" alt="Birthday Decoration">
+                    <div class="service-name">🎈 Birthday</div>
+                </div>
+                
+                <div class="service-card" onclick="openInfoModal('anniversary.jpg', 'Anniversary Decoration', 'Celebrate your beautiful journey of love with our romantic floral arrangements, elegant backdrops, and candle-lit setups.', 'Anniversary Decoration')">
+                    <img src="anniversary.jpg" alt="Anniversary Decoration">
+                    <div class="service-name">❤️ Anniversary</div>
+                </div>
+                
+                <div class="service-card" onclick="openInfoModal('babyshower.jpg', 'Baby Shower Decoration', 'Welcome the little one with joy! We create cute, vibrant, and heart-warming baby shower themes to celebrate the parents-to-be.', 'Baby Shower Decoration')">
+                    <img src="babyshower.jpg" alt="Baby Shower Decoration">
+                    <div class="service-name">👼 Baby Shower</div>
+                </div>
+                
+                <div class="service-card" onclick="openInfoModal('proposal.jpg', 'Proposal Setup', 'Ready to pop the question? We set up the most romantic and dreamy atmospheres with Marry Me neon signs, rose petals, and fairy lights.', 'Proposal & Romantic Setup')">
+                    <img src="proposal.jpg" alt="Proposal Setup">
+                    <div class="service-name">💍 Proposal</div>
+                </div>
+                
+                <div class="service-card" onclick="openInfoModal('welcome.jpg', 'Welcome Decoration', 'Grand welcome decorations for newborns, newly-weds, or special guests. Our elegant balloon art makes every arrival special.', 'Welcome Decoration')">
+                    <img src="welcome.jpg" alt="Welcome Decoration">
+                    <div class="service-name">🎉 Welcome</div>
+                </div>
+                
+                <div class="service-card" onclick="openInfoModal('corporate.jpg', 'Corporate Events', 'Professional, classy, and on-brand decor for conferences, office parties, and corporate galas. We handle it all with perfection.', 'Corporate Events')">
+                    <img src="corporate.jpg" alt="Corporate Events">
+                    <div class="service-name">🏢 Corporate</div>
+                </div>
+                
+                <div class="service-card full-width" onclick="openInfoModal('alltypes.png', 'Premium Custom Decor', 'Got a specific theme or budget in mind? From festive decor to grand luxury setups, we customize everything according to your needs.', 'Custom/Other')">
+                    <img src="alltypes.png" alt="All Types of Decoration">
+                    <div class="service-name">⭐ All Types of Decoration</div>
+                </div>
+
+            </div>
 
             <div class="features-row">
                 <div class="feature-item"><div class="feature-icon">👥</div>PROFESSIONAL<br>TEAM</div>
@@ -483,7 +648,20 @@
         </form>
     </section>
 
-    <!-- LOADING / REDIRECT POPUP -->
+    <div class="info-modal-overlay" id="infoModalOverlay">
+        <div class="info-modal-content">
+            <div class="close-modal-btn" onclick="closeInfoModal()">✖</div>
+            <div class="modal-image-box">
+                <img id="modalImg" src="" alt="Decor Detail">
+            </div>
+            <div class="modal-text-box">
+                <h3 id="modalTitle">Title Here</h3>
+                <p id="modalDesc">Description goes here.</p>
+                <a href="#book" class="modal-book-btn" id="modalBookBtn">Book This Setup</a>
+            </div>
+        </div>
+    </div>
+
     <div class="popup-overlay" id="popupOverlay">
         <div class="success-popup">
             <div class="loader"></div>
@@ -494,12 +672,47 @@
 
     <footer>
         <div class="footer-location">
-            <span>📍</span>
-            <span>Thane | Mulund & Surrounding Areas</span>
+            Serving: Thane | Mulund
         </div>
     </footer>
 
     <script>
+        // --- Modal JavaScript (Makkhan Effect Handle Karne Ke Liye) ---
+        const infoModalOverlay = document.getElementById('infoModalOverlay');
+        const modalImg = document.getElementById('modalImg');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalDesc = document.getElementById('modalDesc');
+        const serviceSelect = document.getElementById('service');
+        const modalBookBtn = document.getElementById('modalBookBtn');
+
+        function openInfoModal(imgSrc, title, desc, formServiceValue) {
+            // Data set kar rahe hain
+            modalImg.src = imgSrc;
+            modalTitle.innerText = title;
+            modalDesc.innerText = desc;
+            
+            // Modal show karna (active class se CSS animation trigger hoga)
+            infoModalOverlay.classList.add('active');
+
+            // Agar user 'Book This Setup' par click kare to
+            modalBookBtn.onclick = function(e) {
+                closeInfoModal(); // Pehle modal band karo
+                serviceSelect.value = formServiceValue; // Form me apne aap select kar do
+            };
+        }
+
+        function closeInfoModal() {
+            infoModalOverlay.classList.remove('active');
+        }
+
+        // Agar user modal ke bahar (dark area me) click kare toh bhi band ho jaye
+        infoModalOverlay.addEventListener('click', function(e) {
+            if(e.target === infoModalOverlay) {
+                closeInfoModal();
+            }
+        });
+
+        // --- Booking Form JavaScript ---
         const bookingForm = document.getElementById('bookingForm');
         const popupOverlay = document.getElementById('popupOverlay');
 
@@ -512,20 +725,14 @@
             const service = document.getElementById('service').value;
             const address = document.getElementById('address').value;
 
-            // WhatsApp ka text ready ho raha hai
             const whatsappMessage = `*New Decoration Enquiry!* 🎉%0A%0A*Name:* ${name}%0A*Phone:* ${phone}%0A*Event Date:* ${date}%0A*Service:* ${service}%0A*Address:* ${address}%0A%0APlease check and confirm my booking.`;
             const whatsappNumber = "918454882926";
             const whatsappLink = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 
-            // 1. Popup dikhao jisme likha hoga "Redirecting to WhatsApp..."
             popupOverlay.classList.add('active');
 
-            // 2. Theek 2.5 seconds (2500ms) baad WhatsApp app open hoga
             setTimeout(function() {
-                // Link ko usi tab mein open karega taaki mobile mein direct app khule
                 window.location.href = whatsappLink; 
-                
-                // Form clear karna aur popup band karna
                 bookingForm.reset();
                 popupOverlay.classList.remove('active');
             }, 2500); 
